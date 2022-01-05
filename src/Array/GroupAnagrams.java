@@ -33,7 +33,7 @@ public class GroupAnagrams {
 
         String[] list = { "eat", "tea", "tan", "ate", "nat", "bat" };
         System.out.println("re "+groupAnagrams2(list));
-//		System.out.println(groupAnagrams_ascii(list));
+		System.out.println("re2 "+groupAnagrams_ascii(list));
     }
 
     // 키 값은 고유하게
@@ -125,7 +125,28 @@ public class GroupAnagrams {
         Map<String, List<String>> map = new HashMap<>();
         List<List<String>> result = new ArrayList<>();
 
-        result.addAll(map.values());
+        for(String str: strs) {
+            int[] count = new int[26];  // a-z 까지 여기에 표시
+            for (int k = 0; k < str.length(); k++)
+                count[str.charAt(k) - 'a']++; // [0,0,0,0,0,0,.....] 총 26개가 있다.
+                // a가 나오면 [1,0,0,0,0,0,.....]
+                // c가 나오면 [1,0,c,0,0,0,.....] 이렇게 표시한다.
+                //
+
+            // int[] 배열을 string으로 바꾸려면, Arrays
+            String key = Arrays.toString(count);
+            System.out.println("key "+ key);
+
+            // 위의 조건절을 아래의 getOrDefault 함수로 대체 가능.
+            List<String> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(str);
+            map.put(key, list);
+
+        }
+
+        for(Map.Entry<String, List<String>> entry : map.entrySet())
+            result.add(entry.getValue());
+
         return result;
     }
 }
