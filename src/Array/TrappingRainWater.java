@@ -43,8 +43,10 @@ public class TrappingRainWater {
         int[] right = new int[len];
 
         int max = height[0]; // 최초로 0번방부터 시작한다.
+        left[0] = height[0];
+
         for(int i=1; i<len; i++ ) {
-            if(height[i] <max ) {
+            if(height[i] < max ) {
                 left[i] = max;
             } else {
                 left[i] = height[i]; // 7번째 배열에 3이 큰값이 나온경우
@@ -58,7 +60,7 @@ public class TrappingRainWater {
         right[len-1] = height[len-1];
 
         for(int i=len-2; i>=0; i-- ) {  // 배열의 맨끝부터 시작햇으니 그 직전부터 비교역순시작
-            if(height[i] <max ) {
+            if(height[i] < max ) {
                 right[i] = max;
             } else {
                 right[i] = height[i]; // 7번째 배열에 3이 큰값이 나온경우
